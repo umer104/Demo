@@ -1,0 +1,39 @@
+name: Deploy React App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger the deployment on pushing to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # This will run the job on the latest Ubuntu runner
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3  # Check out the repository
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3  # Set up Node.js
+      with:
+        node-version: '18'  # Set the version of Node.js (adjust if needed)
+
+    - name: Install dependencies
+      run: npm install  # Install npm dependencies
+
+    - name: Build the React app
+      run: npm run build  # Build the production version of the app
+
+    - name: Set up Git user
+      run: |
+        git config --global user.name "umer104"
+        git config --global user.email "umerakmalku@gmail.com"
+
+    - name: Authenticate with GitHub using PAT
+      run: git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+
+    - name: Deploy to GitHub Pages
+      run: npm run deploy  # Deploy the build folder to GitHub Pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}  # Use GitHub token for authentication
+
