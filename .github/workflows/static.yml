@@ -24,6 +24,11 @@ jobs:
     - name: Build the React app
       run: npm run build  # Build the production version of the app
 
+    - name: Set up Git user
+      run: |
+        git config --global user.name "umer104"
+        git config --global user.email "umerakmalku@gmail.com"
+
     - name: Deploy to GitHub Pages
       run: npm run deploy  # Deploy the build folder to GitHub Pages
       env:
