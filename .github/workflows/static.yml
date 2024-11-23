@@ -29,6 +29,9 @@ jobs:
         git config --global user.name "umer104"
         git config --global user.email "umerakmalku@gmail.com"
 
+    - name: Authenticate with GitHub using PAT
+      run: git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+
     - name: Deploy to GitHub Pages
       run: npm run deploy  # Deploy the build folder to GitHub Pages
       env:
