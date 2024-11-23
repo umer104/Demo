@@ -1,0 +1,9 @@
+.navitems{
+  color: #10e8dd;
+  border: 2px solid #10e8dd;
+}
+
+.navitems:hover {
+    color: #10e8dd;
+    border-color: #10e8dd;
+  }
